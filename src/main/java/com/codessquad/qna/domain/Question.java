@@ -1,7 +1,7 @@
 package com.codessquad.qna.domain;
 
 import com.codessquad.qna.domain.validationGroup.Submit;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
@@ -27,7 +27,7 @@ public class Question extends BaseEntity {
     private String contents;
 
     @OneToMany(mappedBy = "question")
-    @JsonIgnore
+    @JsonManagedReference
     private List<Answer> answers;
 
     @Column(columnDefinition = "int default 0")

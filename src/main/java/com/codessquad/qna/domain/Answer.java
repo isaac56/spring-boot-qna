@@ -1,6 +1,7 @@
 package com.codessquad.qna.domain;
 
 import com.codessquad.qna.domain.validationGroup.Submit;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
@@ -14,6 +15,7 @@ public class Answer extends BaseEntity {
     @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_answer_question"))
     @NotNull
+    @JsonBackReference
     private Question question;
 
     @ManyToOne
@@ -37,7 +39,7 @@ public class Answer extends BaseEntity {
         this.writer = writer;
         this.contents = contents;
 
-        if(this.question != null){
+        if (this.question != null) {
             this.question.increaseAnswerCount();
         }
     }
@@ -61,7 +63,7 @@ public class Answer extends BaseEntity {
     public void delete() {
         this.deleted = true;
 
-        if(this.question != null){
+        if (this.question != null) {
             this.question.decreaseAnswerCount();
         }
     }

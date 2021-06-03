@@ -2,6 +2,7 @@ package com.codessquad.qna.controller;
 
 import com.codessquad.qna.domain.Question;
 import com.codessquad.qna.domain.User;
+import com.codessquad.qna.domain.dto.QuestionResponseDto;
 import com.codessquad.qna.domain.validationGroup.Submit;
 import com.codessquad.qna.exception.NotAuthorizedException;
 import com.codessquad.qna.exception.UserNotFoundInSessionException;
@@ -79,7 +80,7 @@ public class QuestionController {
     @GetMapping("/{id}")
     public String detail(@PathVariable int id, Model model) {
         Question question = questionService.getQuestion(id);
-        model.addAttribute("question", question);
+        model.addAttribute("question", QuestionResponseDto.of(question));
         return "qna/show";
     }
 
